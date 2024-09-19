@@ -34,6 +34,5 @@ fun Counter(){
             Text(text = "Presioname")
         }
 
-        print("Hola")
     }
 }
