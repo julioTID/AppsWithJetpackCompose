@@ -1,6 +1,8 @@
 package com.example.applicationswithcompose
 
 import android.inputmethodservice.Keyboard.Row
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,9 +12,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -22,6 +28,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 
 @Preview
 @Composable
@@ -39,6 +47,11 @@ fun ScreenImc(){
         mutableStateOf(17)
     }
 
+    //True = Hombre, False = Mujer
+    var genero by remember {
+        mutableStateOf(true)
+    }
+
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -48,9 +61,10 @@ fun ScreenImc(){
             Card(
                 modifier = Modifier
                     .padding(16.dp)
-                    .weight(1f),
+                    .weight(1f)
+                    .clickable(onClick = { genero = true }),
                 colors = CardDefaults.cardColors(
-                    containerColor = Color.White
+                    containerColor = if(genero) colorScheme.primary else colorScheme.background
                 ),
                 elevation = CardDefaults.cardElevation(8.dp)
             ) {
@@ -60,17 +74,18 @@ fun ScreenImc(){
                         .fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(text = "Título de la Tarjeta")
-                    Text(text = "Contenido.")
+                    Icon(painter = painterResource(id = R.drawable.ic_male), contentDescription = null)
+                    Text(text = "Hombre")
                 }
             }
 
             Card(
                 modifier = Modifier
                     .padding(16.dp)
-                    .weight(1f),
+                    .weight(1f)
+                    .clickable(onClick = { genero = false }),
                 colors = CardDefaults.cardColors(
-                    containerColor = Color.White
+                    containerColor = if(!genero) colorScheme.primary else colorScheme.background
                 ),
                 elevation = CardDefaults.cardElevation(8.dp)
             ) {
@@ -80,8 +95,8 @@ fun ScreenImc(){
                         .fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(text = "Tarjeta numero 2")
-                    Text(text = "Contenido.")
+                    Icon(painter = painterResource(id = R.drawable.ic_female), contentDescription = null)
+                    Text(text = "Mujer")
                 }
             }
         }
@@ -91,7 +106,8 @@ fun ScreenImc(){
             Card(
                 modifier = Modifier
                     .padding(16.dp)
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
+                colors = CardDefaults.cardColors(colorScheme.background)
             ){
                 Column(
                     modifier = Modifier
@@ -100,14 +116,13 @@ fun ScreenImc(){
                     horizontalAlignment = Alignment.CenterHorizontally
                 ){
                     Text(text = "Altura")
-                    Text(text = "172")
+                    Text(text = altura.toInt().toString() + "cm")
                     Slider(
                         value = altura,
                         onValueChange = {
                             nuevoValor -> altura = nuevoValor
                         },
-                        valueRange = 100f..220f,
-                        steps = 1
+                        valueRange = 120f..220f
                         )
                 }
             }
@@ -118,7 +133,8 @@ fun ScreenImc(){
             Card(
                 modifier = Modifier
                     .padding(16.dp)
-                    .weight(1f)
+                    .weight(1f),
+                colors = CardDefaults.cardColors(colorScheme.background)
             ) {
                 Column(
                     modifier = Modifier
@@ -127,24 +143,24 @@ fun ScreenImc(){
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(text = "Peso")
-                    Text(text = "50")
+                    Text(text = peso.toString())
 
                     Row {
-                        Button(onClick = { /*TODO*/ }) {
-                            Text("+")
+                        Button(onClick = { peso-- }) {
+                            Icon(painter = painterResource(id = R.drawable.ic_remove), contentDescription = null)
                         }
-                        Button(onClick = { /*TODO*/ }) {
-                            Text("-")
+                        Button(onClick = { peso++ }) {
+                            Icon(painter = painterResource(id = R.drawable.ic_add), contentDescription = null)
                         }
                     }
                 }
-
             }
 
             Card(
                 modifier = Modifier
                     .padding(16.dp)
-                    .weight(1f)
+                    .weight(1f),
+                colors = CardDefaults.cardColors(colorScheme.background)
             ){
                 Column(
                     modifier = Modifier
@@ -153,13 +169,13 @@ fun ScreenImc(){
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(text = "Edad")
-                    Text(text = "22")
+                    Text(text = edad.toString())
                     Row {
-                        Button(onClick = { /*TODO*/ }) {
-                            Text("+")
+                        Button(onClick = { edad-- }) {
+                            Icon(painter = painterResource(id = R.drawable.ic_remove), contentDescription = null)
                         }
-                        Button(onClick = { /*TODO*/ }) {
-                            Text("-")
+                        Button(onClick = { edad++ }) {
+                            Icon(painter = painterResource(id = R.drawable.ic_add), contentDescription = null)
                         }
                     }
                 }
@@ -177,7 +193,5 @@ fun ScreenImc(){
                 Text("CALCULAR")
             }
         }
-
-        
     }
 }
