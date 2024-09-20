@@ -3,26 +3,24 @@ package com.example.applicationswithcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.applicationswithcompose.ui.theme.ApplicationsWithComposeTheme
-import com.example.applicationswithcompose.ui.theme.ScreenMain
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
+            //Creamos el navController
             val navController = rememberNavController()
+
+            //Declaramos el navHost
             NavHost(navController = navController, startDestination = "screen_main" , builder = {
+
+                //--Definimos las pantallas
+
+                    //Pantalla principal
                 composable(Routes.screenMain){
                     ScreenMain(navController)
                 }
@@ -31,6 +29,10 @@ class MainActivity : ComponentActivity() {
                 }
                 composable(Routes.screenInputName){
                     TextFieldWithLazyColumn()
+                }
+
+                composable(Routes.screenImc){
+                    ScreenImc()
                 }
             })
         }
