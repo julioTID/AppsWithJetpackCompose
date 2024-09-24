@@ -46,6 +46,14 @@ fun ScreenMain(navController: NavController){
             Text(text = "Calculadora IMC")
         }
 
+        //Boton de SuperHeroApp
+        Button(
+            onClick = { navController.navigate(Routes.screenSuperHeroApp)},
+            modifier = Modifier.fillMaxWidth(0.5f))
+        {
+            Text(text = "SuperHero App (API)" )
+        }
+
     }
 }
 

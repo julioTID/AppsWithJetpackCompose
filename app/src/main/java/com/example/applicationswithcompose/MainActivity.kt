@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.applicationswithcompose.superhero.ScreenSuperHeroApp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +34,10 @@ class MainActivity : ComponentActivity() {
 
                 composable(Routes.screenImc){
                     ScreenImc()
+                }
+
+                composable(Routes.screenSuperHeroApp){
+                    ScreenSuperHeroApp()
                 }
             })
         }

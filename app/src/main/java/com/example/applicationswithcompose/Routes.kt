@@ -6,4 +6,5 @@ object Routes {
     var screenInputName = "screen_input_name"
     var screenImc = "screen_imc"
     var screenImcTwo = "screen_imc_two"
+    var screenSuperHeroApp = "screen_super_hero_app"
 }
